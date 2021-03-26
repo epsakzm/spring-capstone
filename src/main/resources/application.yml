@@ -3,3 +3,9 @@ spring:
     properties:
       hibernate:
         dialect: "org.hibernate.dialect.MySQL5InnoDBDialect"
+    show-sql: true
+  h2:
+    console:
+      enabled: true
+  datasource:
+    generate-unique-name: false
