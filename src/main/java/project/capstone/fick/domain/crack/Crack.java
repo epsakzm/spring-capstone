@@ -29,6 +29,8 @@ public class Crack extends BaseTimeEntity {
 	@Embedded
 	private Location location;
 
+	private Double height;
+
 	@Enumerated(EnumType.STRING)
 	private CrackRiskLevel riskLevel;
 
