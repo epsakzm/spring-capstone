@@ -1,8 +1,6 @@
 package project.capstone.fick.domain.structure;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import project.capstone.fick.domain.BaseTimeEntity;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.crack.Crack;
@@ -12,6 +10,8 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+//setter 삭제
+@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -45,4 +45,9 @@ public class Structure extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "structure")
 	private List<Crack> crackList = new ArrayList<>();
+
+	@Builder
+	public Structure(String name) {
+		this.name = name;
+	}
 }

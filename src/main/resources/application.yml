@@ -1,11 +1,27 @@
+# Spring properties
 spring:
   jpa:
     properties:
       hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
         dialect: "org.hibernate.dialect.MySQL5InnoDBDialect"
     show-sql: true
+    # delete
+    hibernate:
+      ddl-auto: update
   h2:
     console:
       enabled: true
   datasource:
     generate-unique-name: false
+
+# Logger
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

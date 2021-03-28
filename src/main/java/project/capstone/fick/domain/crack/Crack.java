@@ -1,17 +1,15 @@
 package project.capstone.fick.domain.crack;
 
-import lombok.AccessLevel;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import project.capstone.fick.domain.BaseTimeEntity;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.structure.Structure;
 
 import javax.persistence.*;
 
+@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "CRACK")
 @Entity
 public class Crack extends BaseTimeEntity {
 
@@ -43,5 +41,16 @@ public class Crack extends BaseTimeEntity {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "structure_id")
 	private Structure structure;
+
+	@Builder
+	public Crack(String photoURI,
+				 Double width,
+				 //structure 삭제
+				 Structure structure
+				 ) {
+		this.photoURI = photoURI;
+		this.width = width;
+		this.structure = structure;
+	}
 
 }

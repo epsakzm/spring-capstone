@@ -6,10 +6,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class Location {
 
-	private Double x;
+	private Double locationX;
 
-	private Double y;
+	private Double locationY;
 
-	@Column(nullable = true)
-	private String description;
+	private String locationDetail;
 }
