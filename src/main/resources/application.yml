@@ -8,7 +8,7 @@ spring:
         use_sql_comments: true
         dialect: "org.hibernate.dialect.MySQL5InnoDBDialect"
     show-sql: true
-    # delete
+    # ddl auto 배포 시 수정
     hibernate:
       ddl-auto: update
   h2:
@@ -16,6 +16,10 @@ spring:
       enabled: true
   datasource:
     generate-unique-name: false
+# Test: spring.datasource.url, username, password -> (profile 관리)
+#    url: "jdbc:mysql://localhost:3306/spring_capstone"
+#    password: ""
+#    username: ""
 
 # Logger
 logging:

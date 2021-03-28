@@ -22,7 +22,6 @@ class CrackDataJpaTest {
 
 	@Test
 	public void 크랙_생성_테스트() {
-		//given
 		Structure save = structureRepository.save(new Structure("Structure1"));
 
 		crackRepository.save(
@@ -32,10 +31,8 @@ class CrackDataJpaTest {
 				.structure(save)
 			.build());
 
-		//when
 		List<Crack> all = crackRepository.findAll();
 
-		//then
 		System.out.println("==========================================");
 		System.out.println(all.get(0));
 		System.out.println("createdDate = " + all.get(0).getCreatedDate());
