@@ -1,6 +1,5 @@
 package project.capstone.fick.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
 @Embeddable

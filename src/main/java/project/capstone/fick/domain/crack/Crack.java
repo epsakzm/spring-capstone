@@ -1,13 +1,14 @@
 package project.capstone.fick.domain.crack;
 
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 import project.capstone.fick.domain.BaseTimeEntity;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.structure.Structure;
 
 import javax.persistence.*;
 
-@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
