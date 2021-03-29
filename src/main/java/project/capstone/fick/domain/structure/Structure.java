@@ -46,8 +46,4 @@ public class Structure extends BaseTimeEntity {
 	@OneToMany(mappedBy = "structure")
 	private List<Crack> crackList = new ArrayList<>();
 
-	@Builder
-	public Structure(String name) {
-		this.name = name;
-	}
 }

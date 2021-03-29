@@ -42,15 +42,4 @@ public class Crack extends BaseTimeEntity {
 	@JoinColumn(name = "structure_id")
 	private Structure structure;
 
-	@Builder
-	public Crack(String photoURI,
-				 Double width,
-				 //structure 삭제
-				 Structure structure
-				 ) {
-		this.photoURI = photoURI;
-		this.width = width;
-		this.structure = structure;
-	}
-
 }
