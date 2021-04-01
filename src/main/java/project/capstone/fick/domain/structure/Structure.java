@@ -32,7 +32,7 @@ public class Structure extends BaseTimeEntity {
 	private StructureStatus status;
 
 	@Column(length = 500)
-	private String model;
+	private String modelUrl;
 
 	@Embedded
 	private Location location;

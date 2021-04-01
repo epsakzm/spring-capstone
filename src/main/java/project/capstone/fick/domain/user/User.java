@@ -1,6 +1,7 @@
 package project.capstone.fick.domain.user;
 
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.capstone.fick.domain.BaseTimeEntity;
@@ -28,4 +29,22 @@ public class User extends BaseTimeEntity {
 
 	@OneToMany(mappedBy = "user")
 	private List<Project> projectList = new ArrayList<>();
+
+	@Builder
+	public User(Integer UID,
+				String name) {
+		this.UID = UID;
+		this.name = name;
+	}
+
+	public void updateUserName(String name) {
+		this.name = name;
+	}
+
+	//Test Method
+	public void joinProject(Project project) {
+		if (project != null) {
+			projectList.add(project);
+		}
+	}
 }

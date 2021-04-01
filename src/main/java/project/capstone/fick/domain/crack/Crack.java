@@ -3,6 +3,7 @@ package project.capstone.fick.domain.crack;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 import project.capstone.fick.domain.BaseTimeEntity;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.structure.Structure;
@@ -20,7 +21,7 @@ public class Crack extends BaseTimeEntity {
 	private Long id;
 
 	@Column(nullable = false, length = 500)
-	private String photoURI;
+	private String photoUrl;
 
 	@Column(nullable = false)
 	private Double width;
