@@ -31,7 +31,7 @@ public class Project extends BaseTimeEntity {
 	@Column(length = 500)
 	private String photoUrl;
 
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String comment;
 
 	@ManyToOne(fetch = FetchType.LAZY)

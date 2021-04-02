@@ -9,6 +9,7 @@ import project.capstone.fick.domain.project.Project;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -23,7 +24,7 @@ public class Structure extends BaseTimeEntity {
 	@Column(nullable = false)
 	private String name;
 
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String comment;
 
 	private Double height;
@@ -44,4 +45,12 @@ public class Structure extends BaseTimeEntity {
 	@OneToMany(mappedBy = "structure")
 	private List<Crack> crackList = new ArrayList<>();
 
+	@Builder
+	public Structure(String name) {
+		this.name = name;
+	}
+
+	public void addCrack(Crack crack) {
+		this.crackList.add(crack);
+	}
 }
