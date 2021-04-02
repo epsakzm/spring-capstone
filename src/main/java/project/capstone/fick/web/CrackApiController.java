@@ -2,12 +2,10 @@ package project.capstone.fick.web;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import project.capstone.fick.service.crack.CrackService;
+import project.capstone.fick.service.CrackService;
 import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
 import project.capstone.fick.web.dto.crack.CrackUpdateIsCrackRequestDto;
-
-import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -21,7 +19,7 @@ public class CrackApiController {
 	}
 
 	@GetMapping("/api/v1/crack/{id}")
-	public CrackResponseDto responseCrack(@PathVariable Long id) {
+	public CrackResponseDto responseCrackDto(@PathVariable Long id) {
 		return crackService.findById(id);
 	}
 

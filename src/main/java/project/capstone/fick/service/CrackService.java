@@ -1,4 +1,4 @@
-package project.capstone.fick.service.crack;
+package project.capstone.fick.service;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

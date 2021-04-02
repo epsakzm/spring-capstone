@@ -4,7 +4,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import project.capstone.fick.service.SimpleService;
 import project.capstone.fick.web.dto.user.UserLoginRequestDto;
 
 @RequiredArgsConstructor
