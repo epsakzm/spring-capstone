@@ -1,5 +1,6 @@
 package project.capstone.fick.domain.user;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -17,10 +18,11 @@ import java.util.List;
 public class User extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
 	private Long id;
 
+	@JsonProperty("UID")
 	@Column(nullable = false)
 	private Integer UID;
 
@@ -32,9 +34,11 @@ public class User extends BaseTimeEntity {
 
 	@Builder
 	public User(Integer UID,
-				String name) {
+				String name,
+				List<Project> projectList) {
 		this.UID = UID;
 		this.name = name;
+		this.projectList = projectList;
 	}
 
 	public void updateUserName(String name) {
@@ -42,9 +46,12 @@ public class User extends BaseTimeEntity {
 	}
 
 	//Test Method
-	public void joinProject(Project project) {
+	public void addProject(Project project) {
+		if (this.projectList == null) {
+			this.projectList = new ArrayList<>();
+		}
 		if (project != null) {
-			projectList.add(project);
+			this.projectList.add(project);
 		}
 	}
 }

@@ -19,7 +19,7 @@ import java.util.List;
 public class Project extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "project_id")
 	private Long id;
 
@@ -42,14 +42,24 @@ public class Project extends BaseTimeEntity {
 	private List<Structure> structureList = new ArrayList<>();
 
 	@Builder
-	public Project(String name) {
+	public Project(String name, User user) {
 		this.name = name;
+		this.user = user;
 	}
 
 	// Test Method
 	public void setUser(User user) {
 		if (user != null) {
 			this.user = user;
+		}
+	}
+
+	public void addStructure(Structure structure) {
+		if (this.structureList == null) {
+			this.structureList = new ArrayList<>();
+		}
+		if (structure != null) {
+			this.structureList.add(structure);
 		}
 	}
 }

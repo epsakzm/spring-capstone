@@ -1,17 +1,12 @@
 package project.capstone.fick.web.dto.crack;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.crack.CrackRiskLevel;
 import project.capstone.fick.domain.structure.Structure;
 
-@ToString
 @Getter
-@Setter
 @NoArgsConstructor
 public class CrackSaveRequestDto {
 
@@ -32,6 +27,14 @@ public class CrackSaveRequestDto {
 	private String comment;
 
 	private Long structureId;
+
+	public static CrackSaveRequestDto testCrackSaveRequestDto(String photoUrl,
+													   Double width) {
+		CrackSaveRequestDto dto = new CrackSaveRequestDto();
+		dto.photoUrl = photoUrl;
+		dto.width = width;
+		return dto;
+	}
 
 	public Crack toCrackEntity(Structure structure, CrackRiskLevel riskLevel) {
 		return Crack.builder()

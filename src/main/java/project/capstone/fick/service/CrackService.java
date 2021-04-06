@@ -12,6 +12,8 @@ import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
 import project.capstone.fick.web.dto.crack.CrackUpdateIsCrackRequestDto;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 public class CrackService {
@@ -23,7 +25,7 @@ public class CrackService {
 	@Transactional
 	public Long saveCrack(CrackSaveRequestDto dto) {
 		CrackRiskLevel level = CrackRiskLevel.UNKNOWN;
-		Integer dtoRiskLevel = dto.getRiskLevelInteger();
+		int dtoRiskLevel = Optional.ofNullable(dto.getRiskLevelInteger()).orElse(0);
 		if (dtoRiskLevel == 1) {
 			level = CrackRiskLevel.LOW;
 		} else if (dtoRiskLevel == 2) {
@@ -52,6 +54,7 @@ public class CrackService {
 		return id;
 	}
 
+	@Transactional
 	public void delete(Long id) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);

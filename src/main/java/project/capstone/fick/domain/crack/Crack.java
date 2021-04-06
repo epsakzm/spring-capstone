@@ -13,7 +13,7 @@ import javax.persistence.*;
 public class Crack extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "crack_id")
 	private Long id;
 
@@ -56,6 +56,11 @@ public class Crack extends BaseTimeEntity {
 		this.location = location;
 		this.riskLevel = riskLevel;
 		this.structure = structure;
+	}
+
+	public void setStructure(Structure structure) {
+		if (structure != null)
+			this.structure = structure;
 	}
 
 	public void updateIsCrack(Boolean isCrack) {

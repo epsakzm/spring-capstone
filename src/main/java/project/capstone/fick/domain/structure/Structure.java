@@ -17,7 +17,7 @@ import java.util.Optional;
 public class Structure extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "structure_id")
 	private Long id;
 
@@ -46,11 +46,22 @@ public class Structure extends BaseTimeEntity {
 	private List<Crack> crackList = new ArrayList<>();
 
 	@Builder
-	public Structure(String name) {
+	public Structure(String name, Project project) {
 		this.name = name;
+		this.project = project;
 	}
 
 	public void addCrack(Crack crack) {
-		this.crackList.add(crack);
+		if (this.crackList == null) {
+			this.crackList = new ArrayList<>();
+		}
+		if (crack != null)
+			this.crackList.add(crack);
+	}
+
+	public void setProject(Project project) {
+		if (project != null) {
+			this.project = project;
+		}
 	}
 }

@@ -32,12 +32,12 @@ class ProjectDataJpaTest {
 			.name(projectName)
 			.build());
 
-		savedUser.joinProject(savedProject);
+		savedUser.addProject(savedProject);
 		savedProject.setUser(savedUser);
 
 		List<User> userList = userRepository.findAll();
 		List<Project> projectList = projectRepository.findAll();
 
-		
+
 	}
 }
