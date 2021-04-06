@@ -16,9 +16,9 @@ public class UserService {
 
 	@Transactional
 	public UserResponseDto userLoginResponse(UserRequestDto dto) {
-		User user = userRepository.findByUIDAndName(dto.getUID(), dto.getName()).orElseThrow(
+		return new UserResponseDto(userRepository.findByUIDAndName
+			(dto.getUID(), dto.getName()).orElseThrow(
 			() -> new IllegalArgumentException("ID나 이름을 확인하세요")
-		);
-		return new UserResponseDto(user.getUID(), user.getName(), user.getProjectList());
+		));
 	}
 }
