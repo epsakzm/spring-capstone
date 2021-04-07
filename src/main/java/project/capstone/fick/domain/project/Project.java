@@ -28,7 +28,7 @@ public class Project extends BaseTimeEntity {
 	@Embedded
 	private Location location;
 
-	@Column(length = 500)
+	@Column(columnDefinition = "TEXT")
 	private String photoUrl;
 
 	@Column(columnDefinition = "TEXT")
@@ -42,16 +42,16 @@ public class Project extends BaseTimeEntity {
 	private List<Structure> structureList = new ArrayList<>();
 
 	@Builder
-	public Project(String name, User user) {
+	public Project(String name,
+				   Location location,
+				   String photoUrl,
+				   String comment,
+				   User user) {
 		this.name = name;
+		this.location = location;
+		this.photoUrl = photoUrl;
+		this.comment = comment;
 		this.user = user;
-	}
-
-	// Test Method
-	public void setUser(User user) {
-		if (user != null) {
-			this.user = user;
-		}
 	}
 
 	public void addStructure(Structure structure) {

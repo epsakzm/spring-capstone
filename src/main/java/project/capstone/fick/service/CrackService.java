@@ -10,7 +10,7 @@ import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.domain.structure.StructureRepository;
 import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
-import project.capstone.fick.web.dto.crack.CrackUpdateIsCrackRequestDto;
+import project.capstone.fick.web.dto.crack.CrackUpdateRequestDto;
 
 import java.util.Optional;
 
@@ -47,7 +47,7 @@ public class CrackService {
 	}
 
 	@Transactional
-	public Long updateIsCrack(Long id, CrackUpdateIsCrackRequestDto dto) {
+	public Long updateIsCrack(Long id, CrackUpdateRequestDto dto) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);
 		crack.updateIsCrack(dto.getIsCrack());

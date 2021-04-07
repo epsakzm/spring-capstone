@@ -28,14 +28,6 @@ public class CrackSaveRequestDto {
 
 	private Long structureId;
 
-	public static CrackSaveRequestDto testCrackSaveRequestDto(String photoUrl,
-													   Double width) {
-		CrackSaveRequestDto dto = new CrackSaveRequestDto();
-		dto.photoUrl = photoUrl;
-		dto.width = width;
-		return dto;
-	}
-
 	public Crack toCrackEntity(Structure structure, CrackRiskLevel riskLevel) {
 		return Crack.builder()
 			.photoUrl(photoUrl)

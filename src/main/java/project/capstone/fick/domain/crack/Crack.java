@@ -17,10 +17,9 @@ public class Crack extends BaseTimeEntity {
 	@Column(name = "crack_id")
 	private Long id;
 
-	@Column(nullable = false, length = 500)
+	@Column(columnDefinition = "TEXT")
 	private String photoUrl;
 
-	@Column(nullable = false)
 	private Double width;
 
 	@Embedded

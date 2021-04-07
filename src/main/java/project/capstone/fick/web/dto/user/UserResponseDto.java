@@ -6,7 +6,6 @@ import lombok.NoArgsConstructor;
 import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.domain.user.User;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -14,12 +13,14 @@ import java.util.stream.Collectors;
 @NoArgsConstructor
 public class UserResponseDto {
 
+	private Long id;
 	private Integer UID;
 	private String name;
 	private List<Long> projectIdList;
 
 	@Builder
 	public UserResponseDto(User user) {
+		this.id = user.getId();
 		this.UID = user.getUID();
 		this.name = user.getName();
 		this.projectIdList = user.getProjectList().stream().map(Project::getId).collect(Collectors.toList());

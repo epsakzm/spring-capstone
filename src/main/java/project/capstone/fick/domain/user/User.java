@@ -22,11 +22,8 @@ public class User extends BaseTimeEntity {
 	@Column(name = "user_id")
 	private Long id;
 
-	@JsonProperty("UID")
-	@Column(nullable = false)
 	private Integer UID;
 
-	@Column(nullable = false)
 	private String name;
 
 	@OneToMany(mappedBy = "user")
@@ -34,14 +31,8 @@ public class User extends BaseTimeEntity {
 
 	@Builder
 	public User(Integer UID,
-				String name,
-				List<Project> projectList) {
+				String name) {
 		this.UID = UID;
-		this.name = name;
-		this.projectList = projectList;
-	}
-
-	public void updateUserName(String name) {
 		this.name = name;
 	}
 

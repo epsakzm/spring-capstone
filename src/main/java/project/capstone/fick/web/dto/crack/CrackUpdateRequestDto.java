@@ -4,15 +4,14 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-// 어떻게오더라
 @Getter
 @NoArgsConstructor
-public class CrackUpdateIsCrackRequestDto {
+public class CrackUpdateRequestDto {
 
 	private Boolean isCrack;
 
 	@Builder
-	public CrackUpdateIsCrackRequestDto(Boolean isCrack) {
+	public CrackUpdateRequestDto(Boolean isCrack) {
 		this.isCrack = isCrack;
 	}
 }

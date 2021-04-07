@@ -60,16 +60,6 @@ class CrackApiControllerTest {
 	}
 
 	public void 크랙_생성() throws Exception{
-		CrackSaveRequestDto requestDto = CrackSaveRequestDto.testCrackSaveRequestDto("url", 1.11D);
-
-		String url = "http://localhost:" + port + "/api/v1/crack";
-
-		print(new ObjectMapper().writeValueAsString(requestDto));
-		mockMvc.perform(MockMvcRequestBuilders.post(url)
-			.contentType(MediaType.APPLICATION_JSON)
-//			.content(new ObjectMapper().writeValueAsString(requestDto)))
-		).andExpect(status().isOk())
-			.andDo(MockMvcResultHandlers.print());
 	}
 
 	public void test() throws Exception {

@@ -21,7 +21,7 @@ public class Structure extends BaseTimeEntity {
 	@Column(name = "structure_id")
 	private Long id;
 
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String name;
 
 	@Column(columnDefinition = "TEXT")
@@ -30,9 +30,9 @@ public class Structure extends BaseTimeEntity {
 	private Double height;
 
 	@Enumerated(EnumType.STRING)
-	private StructureStatus status;
+	private Boolean isWorkDone;
 
-	@Column(length = 500)
+	@Column(columnDefinition = "TEXT")
 	private String modelUrl;
 
 	@Embedded
@@ -46,8 +46,19 @@ public class Structure extends BaseTimeEntity {
 	private List<Crack> crackList = new ArrayList<>();
 
 	@Builder
-	public Structure(String name, Project project) {
+	public Structure(String name,
+					 String comment,
+					 Double height,
+					 Boolean isWorkDone,
+					 String modelUrl,
+					 Location location,
+					 Project project) {
 		this.name = name;
+		this.comment = comment;
+		this.height = height;
+		this.isWorkDone = isWorkDone;
+		this.modelUrl = modelUrl;
+		this.location = location;
 		this.project = project;
 	}
 
