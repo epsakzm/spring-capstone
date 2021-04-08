@@ -14,9 +14,11 @@ spring:
   h2:
     console:
       enabled: true
+  profiles:
+    active: test
   datasource:
     generate-unique-name: false
-# Test: spring.datasource.url, username, password -> (profile 관리)
+
 #    url: "jdbc:mysql://localhost:3306/spring_capstone"
 #    password: ""
 #    username: ""
