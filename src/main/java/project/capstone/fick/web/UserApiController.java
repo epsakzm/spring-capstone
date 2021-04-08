@@ -1,13 +1,12 @@
 package project.capstone.fick.web;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import project.capstone.fick.service.UserService;
+import project.capstone.fick.web.dto.project.ProjectListResponseDto;
 import project.capstone.fick.web.dto.user.UserRequestDto;
-import project.capstone.fick.web.dto.user.UserResponseDto;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/user")
@@ -17,8 +16,12 @@ public class UserApiController {
 	private final UserService userService;
 
 	@PostMapping
-	public UserResponseDto userLoginResponse(@RequestBody UserRequestDto dto) {
-		return userService.userLoginResponse(dto);
+	public Long userResponse(@RequestBody UserRequestDto dto){
+		return userService.userResponse(dto);
 	}
 
+	@GetMapping("/{id}")
+	public List<ProjectListResponseDto> userProjectListResponse(@PathVariable Long id) {
+		return userService.userProjectListResponseById(id);
+	}
 }

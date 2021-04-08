@@ -1,11 +1,13 @@
 package project.capstone.fick.web.dto.project;
 
 import lombok.Getter;
+import lombok.extern.slf4j.Slf4j;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.project.Project;
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @Getter
 public class ProjectListResponseDto {
 
