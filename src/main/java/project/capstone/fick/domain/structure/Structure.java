@@ -29,8 +29,8 @@ public class Structure extends BaseTimeEntity {
 
 	private Double height;
 
-	@Enumerated(EnumType.STRING)
-	private Boolean isWorkDone;
+	@Column(columnDefinition = "boolean default false")
+	private Boolean isWorkDone = false;
 
 	@Column(columnDefinition = "TEXT")
 	private String modelUrl;

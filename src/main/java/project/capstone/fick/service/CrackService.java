@@ -47,7 +47,7 @@ public class CrackService {
 	}
 
 	@Transactional
-	public Long updateIsCrack(Long id, CrackUpdateRequestDto dto) {
+	public Long updateCrack(Long id, CrackUpdateRequestDto dto) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);
 		crack.updateIsCrack(dto.getIsCrack());
@@ -55,7 +55,7 @@ public class CrackService {
 	}
 
 	@Transactional
-	public void delete(Long id) {
+	public void deleteCrackById(Long id) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);
 		crackRepository.delete(crack);

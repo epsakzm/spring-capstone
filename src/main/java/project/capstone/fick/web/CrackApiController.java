@@ -8,30 +8,30 @@ import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
 import project.capstone.fick.web.dto.crack.CrackUpdateRequestDto;
 
 @RequiredArgsConstructor
+@RequestMapping("/api/v1/crack")
 @RestController
 public class CrackApiController {
 
 	private final CrackService crackService;
 
-	@PostMapping("/api/v1/crack")
+	@PostMapping
 	public Long saveCrack(@RequestBody CrackSaveRequestDto crackSaveRequestDto) {
 		return crackService.saveCrack(crackSaveRequestDto);
 	}
 
-	@GetMapping("/api/v1/crack/{id}")
+	@GetMapping("/{id}")
 	public CrackResponseDto responseCrackDto(@PathVariable Long id) {
 		return crackService.findById(id);
 	}
 
-	@PutMapping("/api/v1/crack/{id}")
-	public Long updateIsCrack(@PathVariable Long id,
-							  @RequestBody CrackUpdateRequestDto dto) {
-		return crackService.updateIsCrack(id, dto);
+	@PutMapping("/{id}")
+	public Long updateCrack(@PathVariable Long id, @RequestBody CrackUpdateRequestDto dto) {
+		return crackService.updateCrack(id, dto);
 	}
 
-	@DeleteMapping("/api/v1/crack/{id}")
+	@DeleteMapping("/{id}")
 	public Long delete(@PathVariable Long id) {
-		crackService.delete(id);
+		crackService.deleteCrackById(id);
 		return id;
 	}
 
