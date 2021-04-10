@@ -1,5 +1,6 @@
 package project.capstone.fick.web.dto.crack;
 
+import lombok.Builder;
 import lombok.Getter;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.crack.Crack;
@@ -24,7 +25,7 @@ public class CrackResponseDto {
 
 	private Boolean isCrack;
 
-	private String structureName;
+	private Long structureId;
 
 	public CrackResponseDto(Crack crack) {
 		this.id = crack.getId();
@@ -35,6 +36,6 @@ public class CrackResponseDto {
 		this.riskLevel = crack.getRiskLevel();
 		this.comment = crack.getComment();
 		this.isCrack = crack.getIsCrack();
-		this.structureName = crack.getStructure().getName();
+		this.structureId = crack.getStructure().getId();
 	}
 }

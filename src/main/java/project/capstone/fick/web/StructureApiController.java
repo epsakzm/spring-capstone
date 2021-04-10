@@ -25,7 +25,7 @@ public class StructureApiController {
 	}
 
 	@PutMapping("/{id}")
-	public Long updateStructure(@RequestBody StructureUpdateRequestDto dto) {
+	public Long updateStructure(@PathVariable Long id, @RequestBody StructureUpdateRequestDto dto) {
 		return structureService.updateStructure(dto);
 	}
 

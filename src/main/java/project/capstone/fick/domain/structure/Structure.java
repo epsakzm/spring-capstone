@@ -49,14 +49,12 @@ public class Structure extends BaseTimeEntity {
 	public Structure(String name,
 					 String comment,
 					 Double height,
-					 Boolean isWorkDone,
 					 String modelUrl,
 					 Location location,
 					 Project project) {
 		this.name = name;
 		this.comment = comment;
 		this.height = height;
-		this.isWorkDone = isWorkDone;
 		this.modelUrl = modelUrl;
 		this.location = location;
 		this.project = project;

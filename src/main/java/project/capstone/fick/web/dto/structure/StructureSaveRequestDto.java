@@ -16,8 +16,6 @@ public class StructureSaveRequestDto {
 
 	private Double height;
 
-	private Boolean isWorkDone;
-
 	private String modelUrl;
 
 	private Double locationX;
@@ -33,7 +31,6 @@ public class StructureSaveRequestDto {
 			.name(name)
 			.comment(comment)
 			.height(height)
-			.isWorkDone(isWorkDone)
 			.modelUrl(modelUrl)
 			.location(Location.builder()
 				.locationX(locationX)

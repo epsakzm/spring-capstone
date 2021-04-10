@@ -35,17 +35,7 @@ public class ProjectService {
 	@Transactional
 	public Long saveProject(ProjectSaveRequestDto dto) {
 		User user = userRepository.findById(dto.getUserId()).orElseThrow(IllegalArgumentException::new);
-		Project savedProject = projectRepository.save(Project.builder()
-			.name(dto.getName())
-			.location(Location.builder()
-				.locationX(dto.getLocationX())
-				.locationY(dto.getLocationY())
-				.locationDetail(dto.getLocationDetail())
-				.build())
-			.photoUrl(dto.getPhotoUrl())
-			.comment(dto.getComment())
-			.user(user)
-			.build());
+		Project savedProject = projectRepository.save(dto.toProjectEntity(user));
 		user.addProject(savedProject);
 		return savedProject.getId();
 	}

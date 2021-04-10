@@ -24,7 +24,7 @@ public class ProjectResponseDto {
 
 	private String comment;
 
-	private String userName;
+	private Long userId;
 
 	private List<StructureListResponseDto> structures;
 
@@ -36,7 +36,7 @@ public class ProjectResponseDto {
 		this.location = project.getLocation();
 		this.photoUrl = project.getPhotoUrl();
 		this.comment = project.getComment();
-		this.userName = project.getUser().getName();
+		this.userId = project.getUser().getId();
 		this.structures = structures;
 	}
 

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.crack.CrackRepository;
+import project.capstone.fick.domain.crack.CrackRiskLevel;
 import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.domain.project.ProjectRepository;
 import project.capstone.fick.domain.structure.Structure;
@@ -138,6 +139,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationDetail("3.33")
 				.build())
 			.structure(savedStructure1)
+			.riskLevel(CrackRiskLevel.LOW)
 			.build());
 		Crack savedCrack2 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url2")
@@ -148,6 +150,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationDetail("3.33")
 				.build())
 			.structure(savedStructure1)
+			.riskLevel(CrackRiskLevel.MEDIUM)
 			.build());
 		Crack savedCrack3 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url3")
@@ -158,6 +161,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationDetail("3.33")
 				.build())
 			.structure(savedStructure2)
+			.riskLevel(CrackRiskLevel.HIGH)
 			.build());
 		Crack savedCrack4 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url4")
@@ -168,6 +172,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationDetail("3.33")
 				.build())
 			.structure(savedStructure2)
+			.riskLevel(CrackRiskLevel.LOW)
 			.build());
 		Crack savedCrack5 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url5")
@@ -178,6 +183,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationDetail("3.33")
 				.build())
 			.structure(savedStructure2)
+			.riskLevel(CrackRiskLevel.MEDIUM)
 			.build());
 		Crack savedCrack6 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url6")
@@ -188,6 +194,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationDetail("3.33")
 				.build())
 			.structure(savedStructure2)
+			.riskLevel(CrackRiskLevel.HIGH)
 			.build());
 
 		savedUser.addProject(savedProject1);
