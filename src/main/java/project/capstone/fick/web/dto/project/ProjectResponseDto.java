@@ -1,5 +1,6 @@
 package project.capstone.fick.web.dto.project;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.capstone.fick.domain.Location;
@@ -26,6 +27,8 @@ public class ProjectResponseDto {
 	private String userName;
 
 	private List<StructureListResponseDto> structures;
+
+	@Builder
 	public ProjectResponseDto(Project project,
 							  List<StructureListResponseDto> structures) {
 		this.id = project.getId();

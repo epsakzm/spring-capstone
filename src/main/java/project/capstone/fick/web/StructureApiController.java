@@ -16,7 +16,7 @@ public class StructureApiController {
 
 	@GetMapping("/{id}")
 	public StructureResponseDto structureResponseDto(@PathVariable Long id) {
-		return null;
+		return structureService.structureResponseDto(id);
 	}
 
 	@PostMapping

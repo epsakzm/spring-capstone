@@ -14,6 +14,7 @@ import project.capstone.fick.web.dto.project.ProjectListResponseDto;
 import project.capstone.fick.web.dto.user.UserRequestDto;
 import project.capstone.fick.web.dto.user.UserResponseDto;
 
+import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,6 +25,7 @@ public class UserService {
 
 	private final UserRepository userRepository;
 
+
 	@Transactional(readOnly = true)
 	public Long userResponse(UserRequestDto dto){
 		User user = userRepository.findByUIDAndName(dto.getUID(), dto.getName())
@@ -32,8 +34,11 @@ public class UserService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<ProjectListResponseDto> userProjectListResponseById(Long id) {
+	public UserResponseDto userResponseDto(Long id) {
 		User user = userRepository.findUserByJoinFetch(id).orElseThrow(IllegalArgumentException::new);
-		return user.getProjectList().stream().map(ProjectListResponseDto::new).collect(Collectors.toList());
+		return UserResponseDto.builder()
+			.user(user)
+			.projects(user.getProjectList().stream().map(ProjectListResponseDto::new).collect(Collectors.toList()))
+			.build();
 	}
 }

@@ -3,7 +3,7 @@ package project.capstone.fick.web.dto.user;
 import lombok.Builder;
 import lombok.Getter;
 import project.capstone.fick.domain.user.User;
-import project.capstone.fick.web.dto.project.ProjectResponseDto;
+import project.capstone.fick.web.dto.project.ProjectListResponseDto;
 
 import java.util.List;
 
@@ -13,15 +13,15 @@ public class UserResponseDto {
 	private Long id;
 	private Integer UID;
 	private String name;
-	private List<ProjectResponseDto> projectList;
+	private List<ProjectListResponseDto> projects;
 
 	@Builder
 	public UserResponseDto(User user,
-						   List<ProjectResponseDto> projectList) {
+						   List<ProjectListResponseDto> projects) {
 		this.id = user.getId();
 		this.UID = user.getUID();
 		this.name = user.getName();
-		this.projectList = projectList;
+		this.projects = projects;
 	}
 
 }

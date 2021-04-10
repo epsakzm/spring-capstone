@@ -1,5 +1,6 @@
 package project.capstone.fick.web.dto.structure;
 
+import lombok.Builder;
 import lombok.Getter;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.structure.Structure;
@@ -30,6 +31,7 @@ public class StructureResponseDto {
 
 	private List<CrackListResponseDto> cracks;
 
+	@Builder
 	public StructureResponseDto (Structure structure,
 								 List<CrackListResponseDto> cracks) {
 		this.id = structure.getId();
