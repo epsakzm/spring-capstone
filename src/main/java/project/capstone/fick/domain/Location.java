@@ -1,8 +1,15 @@
 package project.capstone.fick.domain;
 
+import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
 @Embeddable
 public class Location {
 
@@ -11,4 +18,13 @@ public class Location {
 	private Double locationY;
 
 	private String locationDetail;
+
+	@Builder
+	public Location(Double locationX,
+					Double locationY,
+					String locationDetail) {
+		this.locationX = locationX;
+		this.locationY = locationY;
+		this.locationDetail = locationDetail;
+	}
 }

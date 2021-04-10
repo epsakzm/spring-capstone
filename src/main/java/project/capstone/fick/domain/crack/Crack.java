@@ -7,21 +7,19 @@ import project.capstone.fick.domain.structure.Structure;
 
 import javax.persistence.*;
 
-@ToString
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Crack extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "crack_id")
 	private Long id;
 
-	@Column(nullable = false, length = 500)
-	private String photoURI;
+	@Column(columnDefinition = "TEXT")
+	private String photoUrl;
 
-	@Column(nullable = false)
 	private Double width;
 
 	@Embedded
@@ -32,14 +30,39 @@ public class Crack extends BaseTimeEntity {
 	@Enumerated(EnumType.STRING)
 	private CrackRiskLevel riskLevel;
 
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String comment;
 
 	@Column(columnDefinition = "boolean default true")
-	private Boolean isCrack;
+	private Boolean isCrack = true;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "structure_id")
 	private Structure structure;
 
+	@Builder
+	public Crack(String photoUrl,
+				 Double width,
+				 Location location,
+				 Double height,
+				 CrackRiskLevel riskLevel,
+				 String comment,
+				 Structure structure) {
+		this.photoUrl = photoUrl;
+		this.width = width;
+		this.height = height;
+		this.comment = comment;
+		this.location = location;
+		this.riskLevel = riskLevel;
+		this.structure = structure;
+	}
+
+	public void setStructure(Structure structure) {
+		if (structure != null)
+			this.structure = structure;
+	}
+
+	public void updateIsCrack(Boolean isCrack) {
+		this.isCrack = isCrack;
+	}
 }

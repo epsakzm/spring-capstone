@@ -9,32 +9,31 @@ import project.capstone.fick.domain.project.Project;
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-//setter 삭제
-@Setter
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class Structure extends BaseTimeEntity {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "structure_id")
 	private Long id;
 
-	@Column(nullable = false)
+//	@Column(nullable = false)
 	private String name;
 
-	@Column(length = 1000)
+	@Column(columnDefinition = "TEXT")
 	private String comment;
 
 	private Double height;
 
-	@Enumerated(EnumType.STRING)
-	private StructureStatus status;
+	@Column(columnDefinition = "boolean default false")
+	private Boolean isWorkDone = false;
 
-	@Column(length = 500)
-	private String model;
+	@Column(columnDefinition = "TEXT")
+	private String modelUrl;
 
 	@Embedded
 	private Location location;
@@ -46,4 +45,32 @@ public class Structure extends BaseTimeEntity {
 	@OneToMany(mappedBy = "structure")
 	private List<Crack> crackList = new ArrayList<>();
 
+	@Builder
+	public Structure(String name,
+					 String comment,
+					 Double height,
+					 String modelUrl,
+					 Location location,
+					 Project project) {
+		this.name = name;
+		this.comment = comment;
+		this.height = height;
+		this.modelUrl = modelUrl;
+		this.location = location;
+		this.project = project;
+	}
+
+	public void addCrack(Crack crack) {
+		if (this.crackList == null) {
+			this.crackList = new ArrayList<>();
+		}
+		if (crack != null)
+			this.crackList.add(crack);
+	}
+
+	public void setProject(Project project) {
+		if (project != null) {
+			this.project = project;
+		}
+	}
 }
