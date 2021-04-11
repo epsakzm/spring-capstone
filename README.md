@@ -9,3 +9,5 @@
 - feature/domain -> develop : 도메인 설계 1차
 ### 2021/04/02
 - feature/domain -> develop -> main : 도메인 테스트는 함께
+### 2021/04/10
+- feature/service -> develop -> main : 테스트배포
