@@ -11,3 +11,8 @@
 - feature/domain -> develop -> main : 도메인 테스트는 함께
 ### 2021/04/10
 - feature/service -> develop -> main : 테스트배포
+
+## 버전
+- 2021.04.14
+  - 1.0.1: CORS 설정
+  - 1.0.2: UserResponse.UserId ObjectMapper
