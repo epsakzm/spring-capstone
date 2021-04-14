@@ -25,12 +25,11 @@ public class UserService {
 
 	private final UserRepository userRepository;
 
-
 	@Transactional(readOnly = true)
-	public Long userResponse(UserRequestDto dto){
+	public UserResponseDto.UserId userResponseId(UserRequestDto dto){
 		User user = userRepository.findByUIDAndName(dto.getUID(), dto.getName())
 			.orElseThrow(IllegalArgumentException::new);
-		return user.getId();
+		return new UserResponseDto.UserId(user.getId());
 	}
 
 	@Transactional(readOnly = true)

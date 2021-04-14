@@ -23,7 +23,7 @@ import java.util.List;
 
 @Profile("test")
 @RequiredArgsConstructor
-//@Component
+@Component
 public class TestSaveSQLRunner implements ApplicationRunner {
 
 	private final CrackRepository crackRepository;

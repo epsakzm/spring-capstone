@@ -2,6 +2,7 @@ package project.capstone.fick.web.dto.user;
 
 import lombok.Builder;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import project.capstone.fick.domain.user.User;
 import project.capstone.fick.web.dto.project.ProjectListResponseDto;
 
@@ -24,4 +25,9 @@ public class UserResponseDto {
 		this.projects = projects;
 	}
 
+	@RequiredArgsConstructor
+	@Getter
+	public static class UserId {
+		private final Long id;
+	}
 }

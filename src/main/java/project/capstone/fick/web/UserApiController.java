@@ -14,8 +14,8 @@ public class UserApiController {
 	private final UserService userService;
 
 	@PostMapping
-	public Long userResponse(@RequestBody UserRequestDto dto){
-		return userService.userResponse(dto);
+	public UserResponseDto.UserId userResponseId(@RequestBody UserRequestDto dto){
+		return userService.userResponseId(dto);
 	}
 
 	@GetMapping("/{id}")
