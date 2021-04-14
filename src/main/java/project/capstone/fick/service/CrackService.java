@@ -16,13 +16,13 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class CrackService {
 
 	private final CrackRepository crackRepository;
 
 	private final StructureRepository structureRepository;
 
-	@Transactional
 	public Long saveCrack(CrackSaveRequestDto dto) {
 		CrackRiskLevel level = CrackRiskLevel.UNKNOWN;
 		int dtoRiskLevel = Optional.ofNullable(dto.getRiskLevelInteger()).orElse(0);
@@ -46,7 +46,6 @@ public class CrackService {
 		return new CrackResponseDto(crack);
 	}
 
-	@Transactional
 	public Long updateCrack(Long id, CrackUpdateRequestDto dto) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);
@@ -54,7 +53,6 @@ public class CrackService {
 		return id;
 	}
 
-	@Transactional
 	public void deleteCrackById(Long id) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);

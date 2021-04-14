@@ -21,8 +21,9 @@ import project.capstone.fick.domain.user.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 
+@Profile("test")
 @RequiredArgsConstructor
-@Component
+//@Component
 public class TestSaveSQLRunner implements ApplicationRunner {
 
 	private final CrackRepository crackRepository;
@@ -34,7 +35,6 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 	private final ProjectRepository projectRepository;
 
 	// Test Entities
-	@Profile("test")
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		User savedUser = userRepository.save(User.builder()
