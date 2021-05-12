@@ -10,7 +10,6 @@ import project.capstone.fick.domain.structure.StructureRepository;
 import project.capstone.fick.web.dto.crack.CrackListResponseDto;
 import project.capstone.fick.web.dto.structure.StructureResponseDto;
 import project.capstone.fick.web.dto.structure.StructureSaveRequestDto;
-import project.capstone.fick.web.dto.structure.StructureUpdateRequestDto;
 
 import java.util.stream.Collectors;
 
@@ -38,11 +37,6 @@ public class StructureService {
 		Structure savedStructure = structureRepository.save(dto.toStructureEntity(project));
 		project.addStructure(savedStructure);
 		return savedStructure.getId();
-	}
-
-	@Transactional
-	public Long updateStructure(StructureUpdateRequestDto dto) {
-		return 1L;
 	}
 
 	@Transactional

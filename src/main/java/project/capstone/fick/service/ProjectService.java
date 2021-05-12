@@ -3,14 +3,12 @@ package project.capstone.fick.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.domain.project.ProjectRepository;
 import project.capstone.fick.domain.user.User;
 import project.capstone.fick.domain.user.UserRepository;
 import project.capstone.fick.web.dto.project.ProjectResponseDto;
 import project.capstone.fick.web.dto.project.ProjectSaveRequestDto;
-import project.capstone.fick.web.dto.project.ProjectUpdateRequestDto;
 import project.capstone.fick.web.dto.structure.StructureListResponseDto;
 
 import java.util.stream.Collectors;
@@ -38,11 +36,6 @@ public class ProjectService {
 		Project savedProject = projectRepository.save(dto.toProjectEntity(user));
 		user.addProject(savedProject);
 		return savedProject.getId();
-	}
-
-	@Transactional
-	public Long updateProject(Long id, ProjectUpdateRequestDto dto) {
-		return 1L;
 	}
 
 	@Transactional

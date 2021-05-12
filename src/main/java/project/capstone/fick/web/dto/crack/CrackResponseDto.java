@@ -1,10 +1,11 @@
 package project.capstone.fick.web.dto.crack;
 
-import lombok.Builder;
 import lombok.Getter;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.crack.CrackRiskLevel;
+
+import java.time.LocalDateTime;
 
 @Getter
 public class CrackResponseDto {
@@ -25,6 +26,8 @@ public class CrackResponseDto {
 
 	private Boolean isCrack;
 
+	private LocalDateTime createdDate;
+
 	private Long structureId;
 
 	public CrackResponseDto(Crack crack) {
@@ -37,5 +40,6 @@ public class CrackResponseDto {
 		this.comment = crack.getComment();
 		this.isCrack = crack.getIsCrack();
 		this.structureId = crack.getStructure().getId();
+		this.createdDate = crack.getCreatedDate();
 	}
 }

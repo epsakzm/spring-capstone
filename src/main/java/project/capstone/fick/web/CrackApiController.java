@@ -1,12 +1,17 @@
 package project.capstone.fick.web;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.capstone.fick.service.CrackService;
 import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
 import project.capstone.fick.web.dto.crack.CrackUpdateRequestDto;
 
+import java.util.NoSuchElementException;
+
+@Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/crack")
 @RestController
@@ -22,11 +27,6 @@ public class CrackApiController {
 	@GetMapping("/{id}")
 	public CrackResponseDto responseCrackDto(@PathVariable Long id) {
 		return crackService.findById(id);
-	}
-
-	@PutMapping("/{id}")
-	public Long updateCrack(@PathVariable Long id, @RequestBody CrackUpdateRequestDto dto) {
-		return crackService.updateCrack(id, dto);
 	}
 
 	@DeleteMapping("/{id}")

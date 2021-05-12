@@ -11,6 +11,7 @@ public class UserRequestDto {
 
 	@JsonProperty("UID")
     private Integer UID;
+
     private String name;
 
     @Builder

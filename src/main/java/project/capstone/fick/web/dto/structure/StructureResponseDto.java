@@ -5,9 +5,8 @@ import lombok.Getter;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.web.dto.crack.CrackListResponseDto;
-import project.capstone.fick.web.dto.crack.CrackResponseDto;
-import project.capstone.fick.web.dto.project.ProjectResponseDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -29,6 +28,8 @@ public class StructureResponseDto {
 
 	private String projectName;
 
+	private LocalDateTime createdDate;
+
 	private List<CrackListResponseDto> cracks;
 
 	@Builder
@@ -42,6 +43,7 @@ public class StructureResponseDto {
 		this.modelUrl = structure.getModelUrl();
 		this.location = structure.getLocation();
 		this.projectName = structure.getProject().getName();
+		this.createdDate = structure.getCreatedDate();
 		this.cracks = cracks;
 	}
 }

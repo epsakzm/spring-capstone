@@ -2,13 +2,11 @@ package project.capstone.fick.web.dto.project;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.web.dto.structure.StructureListResponseDto;
-import project.capstone.fick.web.dto.structure.StructureResponseDto;
-import project.capstone.fick.web.dto.user.UserResponseDto;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -26,6 +24,8 @@ public class ProjectResponseDto {
 
 	private Long userId;
 
+	private LocalDateTime createdDate;
+
 	private List<StructureListResponseDto> structures;
 
 	@Builder
@@ -37,6 +37,7 @@ public class ProjectResponseDto {
 		this.photoUrl = project.getPhotoUrl();
 		this.comment = project.getComment();
 		this.userId = project.getUser().getId();
+		this.createdDate = project.getCreatedDate();
 		this.structures = structures;
 	}
 

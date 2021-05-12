@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.*;
 import project.capstone.fick.service.StructureService;
 import project.capstone.fick.web.dto.structure.StructureResponseDto;
 import project.capstone.fick.web.dto.structure.StructureSaveRequestDto;
-import project.capstone.fick.web.dto.structure.StructureUpdateRequestDto;
 
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/structure")
@@ -22,11 +21,6 @@ public class StructureApiController {
 	@PostMapping
 	public Long saveStructure(@RequestBody StructureSaveRequestDto dto) {
 		return structureService.saveStructure(dto);
-	}
-
-	@PutMapping("/{id}")
-	public Long updateStructure(@PathVariable Long id, @RequestBody StructureUpdateRequestDto dto) {
-		return structureService.updateStructure(dto);
 	}
 
 	@DeleteMapping("/{id}")
