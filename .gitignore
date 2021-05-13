@@ -39,4 +39,3 @@ out/
 # yml
 application-db.yml
 application-test.yml
-build.gradle

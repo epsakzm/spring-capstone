@@ -8,6 +8,6 @@ import java.util.Optional;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {
 
-	@Query("select p from Project p join fetch p.structureList where p.id = :id")
+	@Query("select p from Project p left join fetch p.structureList where p.id = :id")
 	Optional<Project> findProjectByJoinFetch(@Param("id") Long id);
 }
