@@ -65,7 +65,7 @@ public class CrackService {
 		return crackRepository.countCrackByStructureId(structureId);
 	}
 
-	public List<Crack> findCrackListByStructureId(Long structureId) {
+	public List<Crack> findCrackByStructureId(Long structureId) {
 		return crackRepository.findCrackByStructureId(structureId);
 	}
 }

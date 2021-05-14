@@ -8,10 +8,8 @@ import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.service.crack.CrackService;
 import project.capstone.fick.service.project.ProjectService;
 import project.capstone.fick.service.structure.StructureService;
-import project.capstone.fick.service.user.UserService;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
@@ -36,7 +34,7 @@ public class ServiceUtil {
 //	}
 
 	public List<Crack> findCrackByStructureId(Long structureId) {
-		return crackService.findCrackListByStructureId(structureId);
+		return crackService.findCrackByStructureId(structureId);
 	}
 
 	public List<Structure> findStructureByProjectId(Long projectId) {
