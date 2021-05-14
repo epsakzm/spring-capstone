@@ -20,6 +20,10 @@ public class CrackListResponseDto {
 
 	private Double height;
 
+	private Double width;
+
+	private Boolean isCrack;
+
 	private LocalDateTime createdDate;
 
 	private CrackRiskLevel riskLevel;
@@ -36,5 +40,7 @@ public class CrackListResponseDto {
 		this.height = crack.getHeight();
 		this.riskLevel = crack.getRiskLevel();
 		this.createdDate = crack.getCreatedDate();
+		this.width = crack.getWidth();
+		this.isCrack = crack.getIsCrack();
 	}
 }

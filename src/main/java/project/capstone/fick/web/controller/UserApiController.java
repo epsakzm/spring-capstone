@@ -1,8 +1,8 @@
-package project.capstone.fick.web;
+package project.capstone.fick.web.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import project.capstone.fick.service.UserService;
+import project.capstone.fick.service.user.UserService;
 import project.capstone.fick.web.dto.user.UserRequestDto;
 import project.capstone.fick.web.dto.user.UserResponseDto;
 

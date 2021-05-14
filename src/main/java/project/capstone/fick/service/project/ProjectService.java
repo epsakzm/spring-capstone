@@ -1,4 +1,4 @@
-package project.capstone.fick.service;
+package project.capstone.fick.service.project;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ import project.capstone.fick.web.dto.project.ProjectResponseDto;
 import project.capstone.fick.web.dto.project.ProjectSaveRequestDto;
 import project.capstone.fick.web.dto.structure.StructureListResponseDto;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -42,5 +43,13 @@ public class ProjectService {
 	public void deleteProjectById(Long id) {
 		Project project = projectRepository.findById(id).orElseThrow(IllegalArgumentException::new);
 		projectRepository.delete(project);
+	}
+
+	public long countProjectByUserId(Long userId) {
+		return projectRepository.countProjectByUserId(userId);
+	}
+
+	public List<Project> findProjectByUserId(Long userId) {
+		return projectRepository.findProjectByUserId(userId);
 	}
 }

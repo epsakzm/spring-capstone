@@ -1,4 +1,4 @@
-package project.capstone.fick.web;
+package project.capstone.fick.web.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;

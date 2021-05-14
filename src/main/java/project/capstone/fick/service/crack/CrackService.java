@@ -1,4 +1,4 @@
-package project.capstone.fick.service;
+package project.capstone.fick.service.crack;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -12,6 +12,7 @@ import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
 import project.capstone.fick.web.dto.crack.CrackUpdateRequestDto;
 
+import java.util.List;
 import java.util.Optional;
 
 @RequiredArgsConstructor
@@ -53,9 +54,18 @@ public class CrackService {
 		return id;
 	}
 
+	@Transactional
 	public void deleteCrackById(Long id) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);
 		crackRepository.delete(crack);
+	}
+
+	public long countCrackByStructureId(Long structureId) {
+		return crackRepository.countCrackByStructureId(structureId);
+	}
+
+	public List<Crack> findCrackListByStructureId(Long structureId) {
+		return crackRepository.findCrackByStructureId(structureId);
 	}
 }

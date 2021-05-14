@@ -49,6 +49,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 프로젝트설명")
 			.build());
 		Project savedProject2 = projectRepository.save(Project.builder()
 			.user(savedUser)
@@ -57,6 +58,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 프로젝트설명")
 			.build());
 		Project savedProject3 = projectRepository.save(Project.builder()
 			.user(savedUser)
@@ -65,6 +67,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 프로젝트설명")
 			.build());
 		Project savedProject4 = projectRepository.save(Project.builder()
 			.user(savedUser)
@@ -73,6 +76,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 프로젝트설명")
 			.build());
 
 		Structure savedStructure1 = structureRepository.save(Structure.builder()
@@ -83,6 +87,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 구조물설명")
 			.build());
 		Structure savedStructure2 = structureRepository.save(Structure.builder()
 			.name("structure2")
@@ -92,6 +97,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 구조물설명")
 			.build());
 		Structure savedStructure3 = structureRepository.save(Structure.builder()
 			.name("structure3")
@@ -101,6 +107,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 구조물설명")
 			.build());
 		Structure savedStructure4 = structureRepository.save(Structure.builder()
 			.name("structure4")
@@ -110,6 +117,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 구조물설명")
 			.build());
 		Structure savedStructure5 = structureRepository.save(Structure.builder()
 			.name("structure5")
@@ -119,6 +127,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 구조물설명")
 			.build());
 		Structure savedStructure6 = structureRepository.save(Structure.builder()
 			.name("structure6")
@@ -128,6 +137,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.locationY(2.22)
 				.locationDetail("3.33")
 				.build())
+			.comment("설명설명 구조물설명")
 			.build());
 
 		Crack savedCrack1 = crackRepository.save(Crack.builder()
@@ -140,6 +150,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.build())
 			.structure(savedStructure1)
 			.riskLevel(CrackRiskLevel.LOW)
+			.comment("설명설명 균열설명")
 			.build());
 		Crack savedCrack2 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url2")
@@ -151,6 +162,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.build())
 			.structure(savedStructure1)
 			.riskLevel(CrackRiskLevel.MEDIUM)
+			.comment("설명설명 균열설명")
 			.build());
 		Crack savedCrack3 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url3")
@@ -162,6 +174,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.build())
 			.structure(savedStructure2)
 			.riskLevel(CrackRiskLevel.HIGH)
+			.comment("설명설명 균열설명")
 			.build());
 		Crack savedCrack4 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url4")
@@ -173,6 +186,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.build())
 			.structure(savedStructure2)
 			.riskLevel(CrackRiskLevel.LOW)
+			.comment("설명설명 균열설명")
 			.build());
 		Crack savedCrack5 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url5")
@@ -184,6 +198,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.build())
 			.structure(savedStructure2)
 			.riskLevel(CrackRiskLevel.MEDIUM)
+			.comment("설명설명 균열설명")
 			.build());
 		Crack savedCrack6 = crackRepository.save(Crack.builder()
 			.photoUrl("photo.url6")
@@ -195,6 +210,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 				.build())
 			.structure(savedStructure2)
 			.riskLevel(CrackRiskLevel.HIGH)
+			.comment("설명설명 균열설명")
 			.build());
 
 		savedUser.addProject(savedProject1);

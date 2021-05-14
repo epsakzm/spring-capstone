@@ -6,7 +6,13 @@ spring:
         show_sql: true
         format_sql: true
         use_sql_comments: true
-        dialect: "org.hibernate.dialect.MySQL5InnoDBDialect"
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
     show-sql: true
   profiles:
-    active: db
+    active: db, test
+  mvc:
+    contentnegotiation:
+      favor-parameter: true
+      favor-path-extension: true
+      media-types:
+        xls: application/vnd.ms-excel

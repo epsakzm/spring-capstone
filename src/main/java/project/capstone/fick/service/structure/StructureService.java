@@ -1,4 +1,4 @@
-package project.capstone.fick.service;
+package project.capstone.fick.service.structure;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -11,6 +11,7 @@ import project.capstone.fick.web.dto.crack.CrackListResponseDto;
 import project.capstone.fick.web.dto.structure.StructureResponseDto;
 import project.capstone.fick.web.dto.structure.StructureSaveRequestDto;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -45,4 +46,11 @@ public class StructureService {
 		structureRepository.delete(structure);
 	}
 
+	public long countStructureByProjectId(Long projectId) {
+		return structureRepository.countStructureByProjectId(projectId);
+	}
+
+	public List<Structure> findStructureByProjectId(Long projectId) {
+		return structureRepository.findStructureByProjectId(projectId);
+	}
 }
