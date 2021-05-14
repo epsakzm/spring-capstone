@@ -16,10 +16,11 @@ public class DownloadApiController {
 	private final XlsxService xlsxService;
 
 	@GetMapping("/{id}")
-	public ResponseEntity<?> download(HttpServletRequest request,
-									  HttpServletResponse response,
-									  @PathVariable("id") Long userId) {
-		return xlsxService.xssfDownload(request, response, userId);
+	public ResponseEntity<?> downloadExcel(HttpServletResponse response,
+										   @PathVariable("id") Long userId) {
+		String fileName = xlsxService.getHeaderFileName(userId);
+		response.setHeader("Content-Disposition", "attachment; fileName=\"" + fileName + ".xlsx\"");
+		return xlsxService.xssfDownload(response, userId);
 	}
 
 	@ExceptionHandler(Exception.class)

@@ -10,9 +10,12 @@ import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.service.ServiceUtil;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -29,15 +32,15 @@ public class XlsxService {
 
 	private static final int MAX_COLUMN = 15;
 
-	public ResponseEntity<?> xssfDownload(HttpServletRequest request,
-										  HttpServletResponse response,
+	public ResponseEntity<?> xssfDownload(HttpServletResponse response,
 										  Long userId) {
+		ServletOutputStream outputStream;
 		XSSFWorkbook workbook = null;
 		XSSFSheet sheet = null;
 		XSSFRow row = null;
 		int sheetNum = 0;
 		int rowNum;
-
+//		String s = new String(fileNameOrg.getBytes("UTF-8"), "ISO-8859-1");
 		try {
 			workbook = new XSSFWorkbook();
 			List<Project> projects = serviceUtil.findProjectByUserId(userId);
@@ -59,11 +62,17 @@ public class XlsxService {
 					sheet.autoSizeColumn(i);
 				}
 			}
-			FileOutputStream fos = new FileOutputStream("/Users/hwpark/workspace/"+ createFileName(userId) +".xlsx");
-			workbook.write(fos);
+			//file Output
+//			FileOutputStream fos = new FileOutputStream("/Users/hwpark/workspace/"+ createFileName(userId) +".xlsx");
+//			workbook.write(fos);
+//			fos.close();
 
-			fos.close();
-			System.out.println("done");
+			//Servlet Response
+			outputStream = response.getOutputStream();
+			workbook.write(outputStream);
+
+			outputStream.flush();
+			outputStream.close();
 		} catch (Exception e) {
 			System.out.println("message");
 			e.printStackTrace();
@@ -205,9 +214,15 @@ public class XlsxService {
 	}
 
 	private String createFileName(Long id) {
-		return id +
-			"_" +
-			LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String fileName = id + "_"  + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+
+		String encName = "null";
+		try{
+			encName = new String(fileName.getBytes(StandardCharsets.UTF_8), "8859_1");
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException("인코딩 오류");
+		}
+		return encName;
 	}
 
 	private XSSFCell createCell(XSSFRow row, String content, int cellNum) {
@@ -222,5 +237,9 @@ public class XlsxService {
 
 	private XSSFSheet createSheet(XSSFWorkbook workbook, String sheetName) {
 		return workbook.createSheet(sheetName);
+	}
+
+	public String getHeaderFileName(Long userId) {
+		return createFileName(userId);
 	}
 }
