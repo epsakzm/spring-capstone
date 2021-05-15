@@ -19,7 +19,7 @@ public class DownloadApiController {
 	public ResponseEntity<?> downloadExcel(HttpServletResponse response,
 										   @PathVariable("id") Long userId) {
 		String fileName = xlsxService.getHeaderFileName(userId);
-		response.setHeader("Content-Disposition", "attachment; fileName=\"" + fileName + ".xls\"");
+		response.setHeader("Content-Disposition", "attachment; fileName=\"" + fileName + "\"");
 		response.setContentType("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
 		return xlsxService.xssfDownload(response, userId);
 	}
