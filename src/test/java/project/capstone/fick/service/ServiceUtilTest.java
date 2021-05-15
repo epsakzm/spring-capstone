@@ -21,6 +21,6 @@ class ServiceUtilTest {
 
 	@Test
 	public void initTest() {
-		service.xssfDownload(null, null, 1L);
+		service.xssfDownload(null, 1L);
 	}
 }
