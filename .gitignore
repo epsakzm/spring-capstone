@@ -39,3 +39,6 @@ out/
 # yml
 application-db.yml
 application-test.yml
+
+*.out
+*.log
