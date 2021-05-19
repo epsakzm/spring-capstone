@@ -35,9 +35,8 @@ public class XlsxService {
 	public ResponseEntity<?> xssfDownload(HttpServletResponse response,
 										  Long userId) {
 		ServletOutputStream outputStream;
-		XSSFWorkbook workbook = null;
-		XSSFSheet sheet = null;
-		XSSFRow row = null;
+		XSSFWorkbook workbook;
+		XSSFSheet sheet;
 		int sheetNum = 0;
 		int rowNum;
 //		String s = new String(fileNameOrg.getBytes("UTF-8"), "ISO-8859-1");
@@ -62,11 +61,6 @@ public class XlsxService {
 					sheet.autoSizeColumn(i);
 				}
 			}
-			//file Output
-//			FileOutputStream fos = new FileOutputStream("/Users/hwpark/workspace/"+ createFileName(userId) +".xlsx");
-//			workbook.write(fos);
-//			fos.close();
-
 			//Servlet Response
 			outputStream = response.getOutputStream();
 			workbook.write(outputStream);
@@ -77,15 +71,6 @@ public class XlsxService {
 			System.out.println("message");
 			e.printStackTrace();
 		}
-//		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//		workbook.write(baos);
-//		baos.flush();
-//		baos.close();
-//
-//		ServletOutputStream servletOutputStream = response.getOutputStream();
-//		servletOutputStream.write(baos.toByteArray());
-//		servletOutputStream.flush();
-//		servletOutputStream.close();
 		return ResponseEntity.ok().build();
 	}
 
@@ -115,8 +100,7 @@ public class XlsxService {
 		}
 
 		// set cell contents
-		for(int i = 0; i < cracks.size(); ++i) {
-			Crack crack = cracks.get(i);
+		for (Crack crack : cracks) {
 			row = createRow(sheet, rowNum++);
 			createCell(row, crack.getId().toString(), 0);
 			createCell(row, crack.getWidth().toString(), 1);
@@ -216,7 +200,7 @@ public class XlsxService {
 	private String createFileName(Long id) {
 		String fileName = id + "_"  + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
 
-		String encName = "null";
+		String encName;
 		try{
 			encName = new String(fileName.getBytes(StandardCharsets.UTF_8), "8859_1");
 		} catch (UnsupportedEncodingException e) {

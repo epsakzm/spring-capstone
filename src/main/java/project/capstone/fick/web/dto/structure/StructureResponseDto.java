@@ -1,5 +1,6 @@
 package project.capstone.fick.web.dto.structure;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import project.capstone.fick.domain.Location;
@@ -45,5 +46,16 @@ public class StructureResponseDto {
 		this.projectName = structure.getProject().getName();
 		this.createdDate = structure.getCreatedDate();
 		this.cracks = cracks;
+	}
+
+	@Getter
+	public static class IdAndName {
+		private Long id;
+		private String name;
+
+		public IdAndName(Structure structure) {
+			this.id = structure.getId();
+			this.name = structure.getName();
+		}
 	}
 }

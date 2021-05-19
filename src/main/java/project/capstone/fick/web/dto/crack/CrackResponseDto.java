@@ -5,6 +5,7 @@ import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.crack.CrackRiskLevel;
 
+import java.lang.reflect.Field;
 import java.time.LocalDateTime;
 
 @Getter

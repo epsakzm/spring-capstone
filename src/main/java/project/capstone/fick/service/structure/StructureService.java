@@ -53,4 +53,8 @@ public class StructureService {
 	public List<Structure> findStructureByProjectId(Long projectId) {
 		return structureRepository.findStructureByProjectId(projectId);
 	}
+
+    public List<StructureResponseDto.IdAndName> findAll() {
+		return structureRepository.findAll().stream().map(StructureResponseDto.IdAndName::new).collect(Collectors.toList());
+    }
 }
