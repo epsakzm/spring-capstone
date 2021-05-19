@@ -1,6 +1,7 @@
 package project.capstone.fick.service.xlsx;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.util.CellRangeAddress;
 import org.apache.poi.xssf.usermodel.*;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +22,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@Slf4j
 @RequiredArgsConstructor
 @Service
 public class XlsxService {
@@ -69,11 +71,8 @@ public class XlsxService {
 			outputStream.flush();
 			outputStream.close();
 		} catch (Exception e) {
-			try {
-				response.getWriter().write(e.getMessage());
-			} catch (IOException ioe) {
-				e.printStackTrace();
-			}
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
 		}
 		return ResponseEntity.ok().build();
 	}

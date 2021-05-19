@@ -34,7 +34,7 @@ public class CrackListResponseDto {
 		this.photoUrl = crack.getPhotoUrl();
 		this.location = Location.builder()
 						.locationX(crack.getLocation().getLocationX())
-						.locationX(crack.getLocation().getLocationY())
+						.locationY(crack.getLocation().getLocationY())
 						.locationDetail(crack.getLocation().getLocationDetail())
 						.build();
 		this.height = crack.getHeight();
