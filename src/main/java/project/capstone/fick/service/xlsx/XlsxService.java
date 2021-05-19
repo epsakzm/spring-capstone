@@ -14,6 +14,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
@@ -68,8 +69,11 @@ public class XlsxService {
 			outputStream.flush();
 			outputStream.close();
 		} catch (Exception e) {
-			System.out.println("message");
-			e.printStackTrace();
+			try {
+				response.getWriter().write(e.getMessage());
+			} catch (IOException ioe) {
+				e.printStackTrace();
+			}
 		}
 		return ResponseEntity.ok().build();
 	}
