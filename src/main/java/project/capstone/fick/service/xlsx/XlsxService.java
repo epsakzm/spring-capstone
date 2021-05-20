@@ -10,13 +10,15 @@ import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.service.ServiceUtil;
+import project.capstone.fick.web.dto.crack.CrackExcelResponseDto;
+import project.capstone.fick.web.dto.project.ProjectExcelResponseDto;
+import project.capstone.fick.web.dto.structure.StructureExcelResponseDto;
 
 import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -42,23 +44,22 @@ public class XlsxService {
 		XSSFSheet sheet;
 		int sheetNum = 0;
 		int rowNum;
-//		String s = new String(fileNameOrg.getBytes("UTF-8"), "ISO-8859-1");
+
 		try {
 			workbook = new XSSFWorkbook();
 			List<Project> projects = serviceUtil.findProjectByUserId(userId);
 			for (Project project : projects) {
 				sheet = createSheet(workbook, String.format("%d - %s", ++sheetNum, project.getName()));
 				rowNum = definitionProject(project, workbook, sheet);
-				//rowNum = 3, used 0, 1, 2
+
 				List<Structure> structures = serviceUtil.findStructureByProjectId(project.getId());
 				for (Structure structure : structures) {
 					rowNum = definitionStructure(structure, workbook, sheet, rowNum);
 					List<Crack> cracks = serviceUtil.findCrackByStructureId(structure.getId());
 					if (!cracks.isEmpty())
 						rowNum = definitionCracks(cracks, workbook, sheet, rowNum);
-					//TODO 균열이 없음을 표시하는 구역
 					else
-						continue;
+						rowNum = noCracks(workbook, sheet, rowNum);
 				}
 				for(int i = 0; i < MAX_COLUMN; ++i) {
 					sheet.autoSizeColumn(i);
@@ -70,6 +71,9 @@ public class XlsxService {
 
 			outputStream.flush();
 			outputStream.close();
+//			FileOutputStream fos = new FileOutputStream("/Users/hwpark/workspace/test.xls");
+//			workbook.write(fos);
+//			fos.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 			return ResponseEntity.notFound().build();
@@ -77,76 +81,71 @@ public class XlsxService {
 		return ResponseEntity.ok().build();
 	}
 
+	private int noCracks(XSSFWorkbook workbook, XSSFSheet sheet, int rowNum) {
+		XSSFRow row = sheet.createRow(rowNum - 1);
+		row.createCell(0).setCellValue("NO CRACKS");
+		setBoldStyleRow(workbook, row, 1);
+		return rowNum + 2;
+	}
+
 	private int definitionCracks(List<Crack> cracks, XSSFWorkbook workbook, XSSFSheet sheet, int rowNum) {
-		final int HEADER_SIZE = 8;
+		Field[] crackExcelClassFields
+			= CrackExcelResponseDto.class.getFields();
+		final int HEADER_SIZE
+			= crackExcelClassFields.length;
 		XSSFRow row;
-		XSSFCell cell;
 
 		//set header
-		row = createRow(sheet, rowNum);
-		cell = createCell(row, "균열", 0);
-		setBoldStyle(workbook, cell, BOLD_FONT_SIZE);
-		sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, HEADER_SIZE - 1));
-		++rowNum;
+		setBoldStyle(
+			workbook,
+			createCell(
+				createRow(sheet, rowNum), "균열 리스트", 0),
+			BOLD_FONT_SIZE);
+		sheet.addMergedRegion(
+			new CellRangeAddress(rowNum, rowNum++, 0, HEADER_SIZE - 1));
 
-		row = createRow(sheet, rowNum++);
-		createCell(row, "id", 0);
-		createCell(row, "width", 1);
-		createCell(row, "height", 2);
-		createCell(row, "x", 3);
-		createCell(row, "y", 4);
-		createCell(row, "risk level", 5);
-		createCell(row, "location", 6);
-		createCell(row, "comment", 7);
-		for(int i = 0; i < HEADER_SIZE; ++i) {
-			setBoldStyle(workbook, row.getCell(i), FONT_SIZE);
+		row	= createRow(sheet, rowNum++);
+		for (int i = 0; i < HEADER_SIZE; ++i) {
+			setBoldStyle(
+				workbook,
+				createCell(
+					row,
+					crackExcelClassFields[i].getName(),
+					i),
+				FONT_SIZE);
 		}
 
-		// set cell contents
 		for (Crack crack : cracks) {
-			row = createRow(sheet, rowNum++);
-			createCell(row, crack.getId().toString(), 0);
-			createCell(row, crack.getWidth().toString(), 1);
-			createCell(row, crack.getHeight().toString(), 2);
-			createCell(row, crack.getLocation().getLocationX().toString(), 3);
-			createCell(row, crack.getLocation().getLocationY().toString(), 4);
-			createCell(row, crack.getRiskLevel().toString(), 5);
-			createCell(row, crack.getLocation().getLocationDetail(), 6);
-			createCell(row, crack.getComment(), 7);
+			new CrackExcelResponseDto(crack)
+				.createCrackCells(
+					createRow(sheet, rowNum++));
 		}
 		return rowNum + 1;
 	}
 
 	private int definitionStructure(Structure structure, XSSFWorkbook workbook, XSSFSheet sheet, int rowNum) {
-		final int HEADER_SIZE = 5;
+		final int HEADER_SIZE
+			= StructureExcelResponseDto.class.getFields().length;
+		StructureExcelResponseDto structureExcelResponseDto
+			= new StructureExcelResponseDto(structure);
 		XSSFRow row;
-		XSSFCell cell;
 
-		// set header
-		row = createRow(sheet, rowNum);
-		cell = createCell(row, "구조물", 0);
-		setBoldStyle(workbook, cell, BOLD_FONT_SIZE);
-		//TODO merge Section
-		sheet.addMergedRegion(new CellRangeAddress(rowNum, rowNum, 0, HEADER_SIZE - 1));
-		++rowNum;
+		setBoldStyle(
+			workbook,
+			createCell(
+				createRow(sheet, rowNum),
+				"구조물 - " + structureExcelResponseDto.getName(),
+				0),
+			BOLD_FONT_SIZE);
+		sheet.addMergedRegion(
+			new CellRangeAddress(rowNum, rowNum++, 0, HEADER_SIZE - 1));
 
 		row = createRow(sheet, rowNum++);
-		createCell(row, "id", 0);
-		createCell(row, "height", 1);
-		createCell(row, "done", 2);
-		createCell(row, "location", 3);
-		createCell(row, "comment", 4);
-		for (int i = 0; i < HEADER_SIZE; ++i) {
-			setBoldStyle(workbook, row.getCell(i), FONT_SIZE);
-		}
+		structureExcelResponseDto.createStructureHeaderCells(row);
+		setBoldStyleRow(workbook, row, HEADER_SIZE);
 
-		//set cell contents
 		row = createRow(sheet, rowNum++);
-		createCell(row, structure.getId().toString(), 0);
-		createCell(row, structure.getHeight().toString(), 1);
-		createCell(row, structure.getIsWorkDone().toString(), 2);
-		createCell(row, structure.getLocation().getLocationDetail(), 3);
-		createCell(row, structure.getComment(), 4);
+		structureExcelResponseDto.createStructureCells(row);
 
 		return rowNum + 1;
 	}
@@ -167,37 +166,39 @@ public class XlsxService {
 	}
 
 	private int definitionProject(Project project, XSSFWorkbook workbook, XSSFSheet sheet) {
-		final int HEADER_SIZE = 5;
+		final int HEADER_SIZE
+			= ProjectExcelResponseDto.class.getFields().length;
 		XSSFRow row;
-		XSSFCell cell;
 
-		//set sheet title
-		row = createRow(sheet, 0);
-		cell = createCell(row, project.getName(), 0);
-		setBoldStyle(workbook, cell, BOLD_FONT_SIZE);
-		sheet.addMergedRegion(new CellRangeAddress(0, 0, 0, HEADER_SIZE - 1));
+		ProjectExcelResponseDto projectExcelResponseDto
+			= new ProjectExcelResponseDto(project);
 
-		//set header
+		setBoldStyle(
+			workbook,
+			createCell(
+				createRow(sheet, 0),
+				projectExcelResponseDto.getName(),
+				0),
+			BOLD_FONT_SIZE);
+		sheet.addMergedRegion(
+			new CellRangeAddress(0, 0, 0, HEADER_SIZE - 1));
+
 		row = createRow(sheet, 1);
+		projectExcelResponseDto
+			.createProjectHeaderCells(row);
+		setBoldStyleRow(workbook, row, HEADER_SIZE);
 
-		createCell(row, "id", 0);
-		createCell(row, "x", 1);
-		createCell(row, "y", 2);
-		createCell(row, "location", 3);
-		createCell(row, "comment", 4);
-		for (int i = 0; i < HEADER_SIZE; ++i) {
-			setBoldStyle(workbook, row.getCell(i), FONT_SIZE);
-		}
-
-		//set cell contents
 		row = createRow(sheet, 2);
-		createCell(row, project.getId().toString(), 0);
-		createCell(row, project.getLocation().getLocationX().toString(), 1);
-		createCell(row, project.getLocation().getLocationY().toString(), 2);
-		createCell(row, project.getLocation().getLocationDetail(), 3);
-		createCell(row, project.getComment(), 4);
+		projectExcelResponseDto
+			.createProjectCells(row);
 
 		return 4;
+	}
+
+	private void setBoldStyleRow(XSSFWorkbook workbook, XSSFRow row, int size) {
+		for (int i = 0; i < size; ++i) {
+			setBoldStyle(workbook, row.getCell(i), FONT_SIZE);
+		}
 	}
 
 	private String createFileName(Long id) {
