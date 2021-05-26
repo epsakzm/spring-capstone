@@ -7,7 +7,7 @@ echo "> Build"
 ./gradlew build --exclude-task test
 # 잠시 테스트 중단
 
-echo "PID"
+echo "CHECK PID.."
 PID=$(pgrep -fl fick | awk '{print $1}')
 
 if [ -z "$PID" ]; then
@@ -18,9 +18,7 @@ else
   echo "application terminated"
 fi
 
-echo "deploy"
 JAR_NAME=$(ls -tr build/libs | tail -n 1)
-echo "founded version = $JAR_NAME"
 echo "deploy $JAR_NAME"
 
 nohup java -jar build/libs/$JAR_NAME 2>&1 &
