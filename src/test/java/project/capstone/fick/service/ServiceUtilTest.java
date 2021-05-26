@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import project.capstone.fick.service.xlsx.XlsxService;
 
-import javax.sql.DataSource;
-
 @SpringBootTest
 class ServiceUtilTest {
 
@@ -21,6 +19,6 @@ class ServiceUtilTest {
 
 	@Test
 	public void initTest() {
-		service.xssfDownload(null, 1L);
+		service.xssfDownloadByUser(null, 1L);
 	}
 }

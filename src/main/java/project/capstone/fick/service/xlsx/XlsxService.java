@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.project.Project;
+import project.capstone.fick.domain.project.ProjectRepository;
 import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.service.ServiceUtil;
 import project.capstone.fick.web.dto.crack.CrackExcelResponseDto;
@@ -31,14 +32,64 @@ public class XlsxService {
 
 	private final ServiceUtil serviceUtil;
 
+	private final ProjectRepository projectRepository;
+
 	private static final int FONT_SIZE = 14;
 
 	private static final int BOLD_FONT_SIZE = 20;
 
 	private static final int MAX_COLUMN = 15;
 
-	public ResponseEntity<?> xssfDownload(HttpServletResponse response,
-										  Long userId) {
+	public static Long SERIAL_ID = 1L;
+
+	public ResponseEntity<?> xssfDownloadByProject(HttpServletResponse response,
+												   Long projectId) {
+		ServletOutputStream outputStream;
+		XSSFWorkbook workbook;
+		XSSFSheet sheet;
+		int rowNum;
+
+		try {
+			workbook = new XSSFWorkbook();
+			sheet = workbook.createSheet("프로젝트 개요");
+			definitionProject(
+				projectRepository.findById(projectId).orElseThrow(IllegalArgumentException::new),
+				workbook,
+				sheet);
+			autoSizeSheet(sheet);
+			List<Structure> structures = serviceUtil.findStructureByProjectId(projectId);
+			for (Structure structure : structures) {
+				rowNum = 1;
+				sheet = workbook.createSheet(structure.getId() + " - " + structure.getName());
+				rowNum = definitionStructure(structure, workbook, sheet, rowNum);
+
+				List<Crack> cracks = serviceUtil.findCrackByStructureId(structure.getId());
+				if (!cracks.isEmpty())
+					definitionCracks(cracks, workbook, sheet, rowNum);
+				else
+					noCracks(workbook, sheet, rowNum);
+				autoSizeSheet(sheet);
+			}
+
+			//Servlet Response
+			outputStream = response.getOutputStream();
+			workbook.write(outputStream);
+
+			outputStream.flush();
+			outputStream.close();
+			// fileoutputstream
+//			FileOutputStream fos = new FileOutputStream("/Users/hwpark/workspace/test.xls");
+//			workbook.write(fos);
+//			fos.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok().build();
+	}
+
+	public ResponseEntity<?> xssfDownloadByUser(HttpServletResponse response,
+												Long userId) {
 		ServletOutputStream outputStream;
 		XSSFWorkbook workbook;
 		XSSFSheet sheet;
@@ -82,9 +133,11 @@ public class XlsxService {
 	}
 
 	private int noCracks(XSSFWorkbook workbook, XSSFSheet sheet, int rowNum) {
-		XSSFRow row = sheet.createRow(rowNum - 1);
-		row.createCell(0).setCellValue("NO CRACKS");
+		final int thisRow = rowNum - 1;
+		XSSFRow row = sheet.createRow(thisRow);
+		row.createCell(0).setCellValue("균열 없음.");
 		setBoldStyleRow(workbook, row, 1);
+		sheet.addMergedRegion(new CellRangeAddress(thisRow, thisRow, 0, 5));
 		return rowNum + 2;
 	}
 
@@ -202,7 +255,10 @@ public class XlsxService {
 	}
 
 	private String createFileName(Long id) {
-		String fileName = id + "_"  + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+		String fileName = id +
+			"_"  +
+			LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")) +
+			SERIAL_ID++;
 
 		String encName;
 		try{
@@ -219,6 +275,12 @@ public class XlsxService {
 		return cell;
 	}
 
+	private void autoSizeSheet(XSSFSheet sheet) {
+		for (int i = 0; i < MAX_COLUMN; ++i) {
+			sheet.autoSizeColumn(i);
+		}
+	}
+
 	private XSSFRow createRow(XSSFSheet sheet, int rowNum) {
 		return sheet.createRow(rowNum);
 	}
@@ -227,7 +289,9 @@ public class XlsxService {
 		return workbook.createSheet(sheetName);
 	}
 
-	public String getHeaderFileName(Long userId) {
-		return createFileName(userId);
+	public String getHeaderFileName(Long id) {
+		return createFileName(id);
 	}
+
+
 }

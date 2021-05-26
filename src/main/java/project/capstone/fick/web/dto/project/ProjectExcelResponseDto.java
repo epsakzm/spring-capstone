@@ -12,9 +12,11 @@ public class ProjectExcelResponseDto {
 
 	public String id;
 
-	public String location_x;
+	public String locationX;
 
-	public String location_y;
+	public String locationY;
+
+	public String locationDetail;
 
 	public String comment;
 
@@ -22,8 +24,9 @@ public class ProjectExcelResponseDto {
 
 	public ProjectExcelResponseDto(Project project) {
 		this.id = Optional.ofNullable(project.getId()).orElse(-1L).toString();
-		this.location_x = Optional.ofNullable(project.getLocation().getLocationX()).orElse(-1D).toString();
-		this.location_y = Optional.ofNullable(project.getLocation().getLocationY()).orElse(-1D).toString();
+		this.locationX = Optional.ofNullable(project.getLocation().getLocationX()).orElse(-1D).toString();
+		this.locationY = Optional.ofNullable(project.getLocation().getLocationY()).orElse(-1D).toString();
+		this.locationDetail = Optional.ofNullable(project.getLocation().getLocationDetail()).orElse("NULL");
 		this.comment = Optional.ofNullable(project.getComment()).orElse("NULL");
 		//private
 		this.name = Optional.ofNullable(project.getName()).orElse("NULL");
@@ -39,8 +42,9 @@ public class ProjectExcelResponseDto {
 	public void createProjectCells(XSSFRow row) {
 		int idx = 0;
 		row.createCell(idx++).setCellValue(getId());
-		row.createCell(idx++).setCellValue(getLocation_x());
-		row.createCell(idx++).setCellValue(getLocation_y());
+		row.createCell(idx++).setCellValue(getLocationX());
+		row.createCell(idx++).setCellValue(getLocationY());
+		row.createCell(idx++).setCellValue(getLocationDetail());
 		row.createCell(idx).setCellValue(getComment());
 	}
 }
