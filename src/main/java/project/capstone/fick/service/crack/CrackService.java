@@ -47,10 +47,14 @@ public class CrackService {
 		return new CrackResponseDto(crack);
 	}
 
+	@Transactional
 	public Long updateCrack(Long id, CrackUpdateRequestDto dto) {
 		Crack crack = crackRepository.findById(id)
 			.orElseThrow(IllegalArgumentException::new);
-		crack.updateIsCrack(dto.getIsCrack());
+		crack.update(
+			Optional.ofNullable(dto.getIsCrack()).orElse(crack.getIsCrack()),
+			Optional.ofNullable(dto.getComment()).orElse(crack.getComment()),
+			Optional.ofNullable(dto.getRiskLevel()).orElse(crack.getRiskLevel()));
 		return id;
 	}
 

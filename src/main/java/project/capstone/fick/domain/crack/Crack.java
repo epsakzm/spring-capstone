@@ -6,6 +6,7 @@ import project.capstone.fick.domain.Location;
 import project.capstone.fick.domain.structure.Structure;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -62,7 +63,9 @@ public class Crack extends BaseTimeEntity {
 			this.structure = structure;
 	}
 
-	public void updateIsCrack(Boolean isCrack) {
+	public void update(Boolean isCrack, String comment, CrackRiskLevel riskLevel) {
 		this.isCrack = isCrack;
+		this.comment = comment;
+		this.riskLevel = riskLevel;
 	}
 }

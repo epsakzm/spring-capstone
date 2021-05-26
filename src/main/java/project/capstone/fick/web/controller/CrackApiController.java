@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import project.capstone.fick.service.crack.CrackService;
 import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
+import project.capstone.fick.web.dto.crack.CrackUpdateRequestDto;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -29,6 +30,11 @@ public class CrackApiController {
 	public Long delete(@PathVariable Long id) {
 		crackService.deleteCrackById(id);
 		return id;
+	}
+
+	@PutMapping("/{id}")
+	public Long updateCrack(@PathVariable Long id, @RequestBody CrackUpdateRequestDto dto) {
+		return crackService.updateCrack(id, dto);
 	}
 
 }
