@@ -34,8 +34,8 @@ public class Crack extends BaseTimeEntity {
 	@Column(columnDefinition = "TEXT")
 	private String comment;
 
-	@Column(columnDefinition = "boolean default true")
-	private Boolean isCrack = true;
+	@Column(columnDefinition = "boolean default false")
+	private Boolean isCrack = false;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "structure_id")

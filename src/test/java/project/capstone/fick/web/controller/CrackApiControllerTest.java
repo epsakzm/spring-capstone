@@ -47,7 +47,10 @@ class CrackApiControllerTest {
 		System.out.println(crack.getComment());
 		System.out.println(crack.getRiskLevel());
 
-		CrackUpdateRequestDto dto = new CrackUpdateRequestDto(null, "바뀐 코멘트", null);
+		CrackUpdateRequestDto dto = new CrackUpdateRequestDto(false, "바뀐 코멘트", CrackRiskLevel.MEDIUM);
+		System.out.println("=================================");
+		System.out.println(objectMapper.writeValueAsString(dto));
+		System.out.println("=================================");
 		/*
 		to-be
 		isCrack = false

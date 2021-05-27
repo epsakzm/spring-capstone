@@ -25,7 +25,7 @@ public class CrackService {
 	private final StructureRepository structureRepository;
 
 	public Long saveCrack(CrackSaveRequestDto dto) {
-		CrackRiskLevel level = CrackRiskLevel.UNKNOWN;
+		CrackRiskLevel level = CrackRiskLevel.UNDEFINED;
 		int dtoRiskLevel = Optional.ofNullable(dto.getRiskLevelInteger()).orElse(0);
 		if (dtoRiskLevel == 1) {
 			level = CrackRiskLevel.LOW;
