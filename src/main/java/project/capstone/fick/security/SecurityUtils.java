@@ -1,5 +1,6 @@
 package project.capstone.fick.security;
 
+import io.jsonwebtoken.io.Decoders;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpRequest;
 import org.springframework.security.core.Authentication;
@@ -17,6 +18,8 @@ import java.util.Optional;
 public class SecurityUtils {
 
 	public static final String BEARER = "Bearer ";
+
+	public static final long TOKEN_VALIDITY_SECONDS = 60 * 60 * 24;
 
 	private SecurityUtils() {}
 
@@ -45,10 +48,6 @@ public class SecurityUtils {
 	public static String substringBearerString(String stringWithBearer) {
 		return StringUtils.hasText(stringWithBearer) && stringWithBearer.startsWith(BEARER) ?
 			stringWithBearer.substring(7) : null;
-	}
-
-	public static String resolveRequestURI(ServletRequest request) {
-		return ((HttpServletRequest)request).getRequestURI();
 	}
 
 }
