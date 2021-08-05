@@ -6,10 +6,13 @@ import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.crack.CrackRiskLevel;
 import project.capstone.fick.domain.structure.Structure;
 
+import javax.validation.constraints.NotNull;
+
 @Getter
 @NoArgsConstructor
 public class CrackSaveRequestDto {
 
+	@NotNull
 	private String photoUrl;
 
 	private Double width;
@@ -22,8 +25,10 @@ public class CrackSaveRequestDto {
 
 	private Double height;
 
+	@NotNull
 	private Integer riskLevelInteger;
 
+	@NotNull
 	private String comment;
 
 	private Long structureId;

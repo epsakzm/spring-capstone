@@ -8,6 +8,8 @@ import project.capstone.fick.web.dto.crack.CrackResponseDto;
 import project.capstone.fick.web.dto.crack.CrackSaveRequestDto;
 import project.capstone.fick.web.dto.crack.CrackUpdateRequestDto;
 
+import javax.validation.Valid;
+
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/crack")
@@ -17,7 +19,7 @@ public class CrackApiController {
 	private final CrackService crackService;
 
 	@PostMapping
-	public Long saveCrack(@RequestBody CrackSaveRequestDto crackSaveRequestDto) {
+	public Long saveCrack(@RequestBody @Valid CrackSaveRequestDto crackSaveRequestDto) {
 		return crackService.saveCrack(crackSaveRequestDto);
 	}
 

@@ -10,14 +10,13 @@ import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.project.Project;
 import project.capstone.fick.domain.project.ProjectRepository;
 import project.capstone.fick.domain.structure.Structure;
-import project.capstone.fick.service.ServiceUtil;
+import project.capstone.fick.service.ServiceUtils;
 import project.capstone.fick.web.dto.crack.CrackExcelResponseDto;
 import project.capstone.fick.web.dto.project.ProjectExcelResponseDto;
 import project.capstone.fick.web.dto.structure.StructureExcelResponseDto;
 
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
-import java.io.FileOutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
@@ -30,7 +29,7 @@ import java.util.List;
 @Service
 public class XlsxService {
 
-	private final ServiceUtil serviceUtil;
+	private final ServiceUtils serviceUtil;
 
 	private final ProjectRepository projectRepository;
 

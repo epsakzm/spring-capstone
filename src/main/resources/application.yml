@@ -9,10 +9,15 @@ spring:
         dialect: "org.hibernate.dialect.MySQL5InnoDBDialect"
     show-sql: true
   profiles:
-    active: db
+    active: db, test
   mvc:
     contentnegotiation:
       favor-parameter: true
       favor-path-extension: true
       media-types:
         xls: application/vnd.ms-excel
+  application:
+    name: fick
+
+server:
+  port: 8081

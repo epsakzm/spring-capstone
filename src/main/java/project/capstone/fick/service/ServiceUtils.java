@@ -1,6 +1,9 @@
 package project.capstone.fick.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.BeansException;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 import project.capstone.fick.domain.crack.Crack;
 import project.capstone.fick.domain.project.Project;
@@ -13,13 +16,15 @@ import java.util.*;
 
 @RequiredArgsConstructor
 @Component
-public class ServiceUtil {
+public class ServiceUtils implements ApplicationContextAware {
 
 	private final CrackService crackService;
 
 	private final StructureService structureService;
 
 	private final ProjectService projectService;
+
+	private static ApplicationContext applicationContext;
 //
 //	public Long countCrackByStructureId(Long structureId) {
 //		return crackService.countCrackByStructureId(structureId);
@@ -44,4 +49,14 @@ public class ServiceUtil {
 	public List<Project> findProjectByUserId(Long userId) {
 		return projectService.findProjectByUserId(userId);
 	}
+
+	@Override
+	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+		ServiceUtils.applicationContext = applicationContext;
+	}
+
+	public static <T> T getBean(Class<T> clazz) {
+		return applicationContext.getBean(clazz);
+	}
+
 }
