@@ -14,7 +14,7 @@ public class UserResponseDto {
 
 	private Long id;
 
-	private Integer UID;
+	private String UID;
 
 	private String name;
 

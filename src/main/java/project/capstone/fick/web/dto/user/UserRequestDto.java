@@ -10,12 +10,12 @@ import lombok.NoArgsConstructor;
 public class UserRequestDto {
 
 	@JsonProperty("UID")
-    private Integer UID;
+    private String UID;
 
     private String name;
 
     @Builder
-    public UserRequestDto(Integer UID, String name) {
+    public UserRequestDto(String UID, String name) {
     	this.name = name;
     	this.UID = UID;
 	}

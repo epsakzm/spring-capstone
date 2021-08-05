@@ -38,7 +38,7 @@ public class TestSaveSQLRunner implements ApplicationRunner {
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		User savedUser = userRepository.save(User.builder()
-			.UID(201511818)
+			.UID("201511818")
 			.name("name")
 			.role(Role.ADMIN)
 			.password(passwordEncoder.encode("password"))

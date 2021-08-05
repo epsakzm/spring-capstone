@@ -24,7 +24,7 @@ public class User extends BaseTimeEntity {
 	private Long id;
 
 	@Column(nullable = false)
-	private Integer UID;
+	private String UID;
 
 	private String name;
 
@@ -42,7 +42,7 @@ public class User extends BaseTimeEntity {
 	private List<Project> projectList = new ArrayList<>();
 
 	@Builder
-	public User(Integer UID,
+	public User(String UID,
 				String name,
 				String password,
 				Role role) {

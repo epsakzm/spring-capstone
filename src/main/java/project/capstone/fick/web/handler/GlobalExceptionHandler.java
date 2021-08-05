@@ -11,20 +11,18 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import java.util.NoSuchElementException;
 
 
-@Order(Ordered.HIGHEST_PRECEDENCE)
+//@Order(Ordered.HIGHEST_PRECEDENCE)
 @Slf4j
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-	@ExceptionHandler(IllegalArgumentException.class)
+	@ExceptionHandler
 	public ResponseEntity<?> illegalArgumentExceptionHandler(IllegalArgumentException exception) {
-		Throwable cause = exception.getCause();
-		return ResponseEntity.badRequest().body(cause.toString());
+		return ResponseEntity.badRequest().body(exception.getMessage());
 	}
 
-	@ExceptionHandler(NoSuchElementException.class)
+	@ExceptionHandler
 	public ResponseEntity<?> noSuchElementExceptionHandler(NoSuchElementException exception) {
-		Throwable cause = exception.getCause();
-		return ResponseEntity.badRequest().body(cause.toString());
+		return ResponseEntity.badRequest().body(exception.getMessage());
 	}
 }

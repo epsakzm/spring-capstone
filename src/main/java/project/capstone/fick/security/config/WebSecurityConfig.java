@@ -14,7 +14,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import project.capstone.fick.security.handler.JwtAccessDeniedHandler;
 import project.capstone.fick.security.handler.JwtAuthenticationEntryPoint;
-import project.capstone.fick.security.jwt.JwtSecurityConfigAdapter;
 import project.capstone.fick.security.jwt.WebTokenProvider;
 
 @RequiredArgsConstructor
@@ -62,8 +61,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.POST, "/api/v1/auth")
 					.permitAll()
 				.anyRequest()
-//					.authenticated()
-				.permitAll()
+					.hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+//				.permitAll()
 		.and()
 			.apply(new JwtSecurityConfigAdapter(tokenProvider));
 	}

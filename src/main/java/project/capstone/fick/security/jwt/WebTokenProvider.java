@@ -72,7 +72,7 @@ public class WebTokenProvider implements InitializingBean {
 			.map(SimpleGrantedAuthority::new)
 			.collect(Collectors.toList());
 
-		org.springframework.security.core.userdetails.User userDetails = new User(claims.getSubject(), null, authorities);
+		org.springframework.security.core.userdetails.User userDetails = new User(claims.getSubject(), "", authorities);
 
 		return new UsernamePasswordAuthenticationToken(userDetails, tokenValue, authorities);
 	}
