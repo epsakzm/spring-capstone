@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import project.capstone.fick.domain.BaseTimeEntity;
 import project.capstone.fick.domain.project.Project;
+import project.capstone.fick.security.domain.Role;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,18 +23,33 @@ public class User extends BaseTimeEntity {
 	@Column(name = "user_id")
 	private Long id;
 
+	@Column(nullable = false)
 	private Integer UID;
 
 	private String name;
+
+	@Column(nullable = false)
+	private String password;
+
+	@Transient
+	private boolean isActivated;
+
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false)
+	private Role role;
 
 	@OneToMany(mappedBy = "user")
 	private List<Project> projectList = new ArrayList<>();
 
 	@Builder
 	public User(Integer UID,
-				String name) {
+				String name,
+				String password,
+				Role role) {
 		this.UID = UID;
 		this.name = name;
+		this.role = role;
+		this.password = password;
 	}
 
 	//Test Method
@@ -44,5 +60,9 @@ public class User extends BaseTimeEntity {
 		if (project != null) {
 			this.projectList.add(project);
 		}
+	}
+
+	public void setActivated() {
+		this.isActivated = true;
 	}
 }

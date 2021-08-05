@@ -17,6 +17,7 @@ import project.capstone.fick.web.dto.user.UserResponseDto;
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -39,5 +40,10 @@ public class UserService {
 			.user(user)
 			.projects(user.getProjectList().stream().map(ProjectListResponseDto::new).collect(Collectors.toList()))
 			.build();
+	}
+
+	@Transactional
+	public Optional<User> findUserByUsername(String UID) {
+		return userRepository.findByUID(UID);
 	}
 }

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import project.capstone.fick.domain.Location;
@@ -17,6 +18,7 @@ import project.capstone.fick.domain.structure.Structure;
 import project.capstone.fick.domain.structure.StructureRepository;
 import project.capstone.fick.domain.user.User;
 import project.capstone.fick.domain.user.UserRepository;
+import project.capstone.fick.security.domain.Role;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,19 +29,19 @@ import java.util.List;
 public class TestSaveSQLRunner implements ApplicationRunner {
 
 	private final CrackRepository crackRepository;
-
 	private final StructureRepository structureRepository;
-
 	private final UserRepository userRepository;
-
 	private final ProjectRepository projectRepository;
+	private final PasswordEncoder passwordEncoder;
 
 	// Test Entities
 	@Override
 	public void run(ApplicationArguments args) throws Exception {
 		User savedUser = userRepository.save(User.builder()
 			.UID(201511818)
-			.name("nnaammee")
+			.name("name")
+			.role(Role.ADMIN)
+			.password(passwordEncoder.encode("password"))
 			.build());
 
 		Project savedProject1 = projectRepository.save(Project.builder()
